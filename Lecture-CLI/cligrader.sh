@@ -100,22 +100,30 @@ to_fuzzy_regex() {
   printf '%s' "$s"
 }
 
-# ---- Student list (use your exact rule) ----
-students=($(awk -F: '/:x:10[0-9][0-9]/ && $1 !~ /ec2-user|bastion/ {print $1}' /etc/passwd))
-
-# echo "Students matched: ${#students[@]}"
-if [[ ${#students[@]} -eq 0 ]]; then
-  echo "No students matched your /etc/passwd UID filter." >&2
-  exit 1
-fi
-
 # ---- Output header ----
 printf "%s%-18s %7s %7s  %s%s\n" "$BLUE" "STUDENT" "FOUND" "POINTS" "SLIDE FOR MISSING COMMAND" "$RESET"
-
 printf "%s%-18s %7s %7s  %s%s\n" "$BLUE" "------------------" "-----" "------" "------------------------------" "$RESET"
 
 
+# ---- Student list (use your exact rule) ----
+# students=($(awk -F: '/:x:10[0-9][0-9]/ && $1 !~ /ec2-user|bastion/ {print $1}' /etc/passwd))
+
+
 # ---- Grade each student ----
+if [[ $EUID -eq 0 ]]; then
+  # root: grade all students
+  students=($(awk -F: '/:x:10[0-9][0-9]/ && $1 !~ /ec2-user|bastion/ {print $1}' /etc/passwd))
+
+  # echo "Students matched: ${#students[@]}"
+  if [[ ${#students[@]} -eq 0 ]]; then
+    echo "No students matched your /etc/passwd UID filter." >&2
+    exit 1
+  fi
+else
+  # non-root: grade only the current user
+  students=("${USER}")
+fi
+
 for user in "${students[@]}"; do
   # Resolve home directory; never let failure exit the script
   pwent="$(getent passwd "$user" || true)"
