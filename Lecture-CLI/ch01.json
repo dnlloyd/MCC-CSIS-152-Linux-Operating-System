@@ -1,0 +1,22 @@
+[
+    {
+        "slide": 9,
+        "command": "systemctl list-units --type=service --all"
+    },
+    {
+        "slide": 14,
+        "command": "uname -r"
+    },
+    {
+        "slide": 31,
+        "command": "systemctl status httpd"
+    },
+    {
+        "slide": 34,
+        "command": "cat /etc/os-release"
+    },
+    {
+        "slide": 41,
+        "command": "rpm -qa"
+    }
+]
