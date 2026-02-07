@@ -1,0 +1,46 @@
+[
+    {
+        "slide": 9,
+        "command": "cd ~"
+    },
+    {
+        "slide": 9,
+        "command": "pwd"
+    },
+    {
+        "slide": 9,
+        "command": "cd .."
+    },
+    {
+        "slide": 10,
+        "command": "cd ../.."
+    },
+    {
+        "slide": 11,
+        "command": "cd /etc/httpd"
+    },
+    {
+        "slide": 11,
+        "command": "cd conf"
+    },
+    {
+        "slide": 12,
+        "command": "tree -L 3 -d"
+    },
+    {
+        "slide": 15,
+        "command": "ls -al /dev/nvme*"
+    },
+    {
+        "slide": 24,
+        "command": "ls -l /mcc/files"
+    },
+    {
+        "slide": 26,
+        "command": "tac /etc/passwd"
+    },
+    {
+        "slide": 33,
+        "command": "grep dlloyd /etc/passwd"
+    }
+]
